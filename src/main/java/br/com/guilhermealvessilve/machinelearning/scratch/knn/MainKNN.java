@@ -1,10 +1,8 @@
 package br.com.guilhermealvessilve.machinelearning.scratch.knn;
 
-import br.com.guilhermealvessilve.utils.DatasetSplit;
+import br.com.guilhermealvessilve.utils.DatasetNd4j;
 import br.com.guilhermealvessilve.utils.Resources;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.Plot;
-import tech.tablesaw.plotly.api.ScatterPlot;
 
 import java.io.IOException;
 
@@ -26,13 +24,11 @@ public class MainKNN {
             System.out.println(table.structure());
             System.out.println(table.print());
 
-            Plot.show(
-                    ScatterPlot.create("Sepal", table, "sepal_length", "sepal_width"));
+            //Plot.show(ScatterPlot.create("Sepal", table, "sepal_length", "sepal_width"));
+            //Plot.show(ScatterPlot.create("Petal", table, "petal_length", "petal_width"));
 
-            Plot.show(
-                    ScatterPlot.create("Petal", table, "petal_length", "petal_width"));
-
-            final var splitTrainTest = DatasetSplit.splitXYTrainTest(0.8, table);
+            final var splitTrainTest = DatasetNd4j.to2DINDArray(0.8, table);
+            System.out.println(splitTrainTest);
             var xTrain = splitTrainTest.xTrain();
             var yTrain = splitTrainTest.yTrain();
             var xTest = splitTrainTest.xTest();
