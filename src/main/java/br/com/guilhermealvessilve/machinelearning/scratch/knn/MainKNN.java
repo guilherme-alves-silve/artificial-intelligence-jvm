@@ -1,8 +1,8 @@
 package br.com.guilhermealvessilve.machinelearning.scratch.knn;
 
-import br.com.guilhermealvessilve.utils.training.DatasetNd4j;
-import br.com.guilhermealvessilve.utils.plot.MultiScatterPlot;
 import br.com.guilhermealvessilve.utils.Resources;
+import br.com.guilhermealvessilve.utils.plot.MultiScatterPlot;
+import br.com.guilhermealvessilve.utils.training.DatasetNd4j;
 import tech.tablesaw.api.Table;
 
 import java.io.IOException;
@@ -41,7 +41,8 @@ public class MainKNN {
             var yTest = splitTrainTest.yTest();
 
             final var knn = new KNN(3);
-            //knn.fit();
+            knn.fit(xTrain, yTrain);
+            knn.predict(xTest.getRow(0));
         }
     }
 }

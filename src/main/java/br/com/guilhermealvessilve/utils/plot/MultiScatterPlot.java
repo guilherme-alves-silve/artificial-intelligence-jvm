@@ -27,6 +27,7 @@ public class MultiScatterPlot {
                         table.numberColumn(entry.getKey()),
                         table.numberColumn(entry.getValue())
                     )
+                    .showLegend(true)
                     .build())
             .toArray(Trace[]::new);
 
