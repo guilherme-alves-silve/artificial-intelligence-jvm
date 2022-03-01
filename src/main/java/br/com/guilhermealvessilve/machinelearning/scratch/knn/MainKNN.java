@@ -1,10 +1,13 @@
 package br.com.guilhermealvessilve.machinelearning.scratch.knn;
 
-import br.com.guilhermealvessilve.utils.DatasetNd4j;
+import br.com.guilhermealvessilve.utils.training.DatasetNd4j;
+import br.com.guilhermealvessilve.utils.plot.MultiScatterPlot;
 import br.com.guilhermealvessilve.utils.Resources;
 import tech.tablesaw.api.Table;
 
 import java.io.IOException;
+
+import static java.util.Map.entry;
 
 public class MainKNN {
 
@@ -24,8 +27,11 @@ public class MainKNN {
             System.out.println(table.structure());
             System.out.println(table.print());
 
-            //Plot.show(ScatterPlot.create("Sepal", table, "sepal_length", "sepal_width"));
-            //Plot.show(ScatterPlot.create("Petal", table, "petal_length", "petal_width"));
+            MultiScatterPlot.plot("Iris Dataset", table,
+                    "length",
+                    "width",
+                    entry("sepal_length", "sepal_width"),
+                    entry("petal_length", "petal_width"));
 
             final var splitTrainTest = DatasetNd4j.to2DINDArray(0.8, table);
             System.out.println(splitTrainTest);

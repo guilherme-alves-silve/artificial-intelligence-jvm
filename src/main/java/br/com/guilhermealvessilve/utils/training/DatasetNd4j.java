@@ -1,4 +1,4 @@
-package br.com.guilhermealvessilve.utils;
+package br.com.guilhermealvessilve.utils.training;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

@@ -1,4 +1,4 @@
-package br.com.guilhermealvessilve.utils;
+package br.com.guilhermealvessilve.utils.training;
 
 import tech.tablesaw.api.Table;
 
