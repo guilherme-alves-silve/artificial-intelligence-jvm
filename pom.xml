@@ -32,7 +32,13 @@
 
         <dependency>
             <groupId>tech.tablesaw</groupId>
-            <artifactId>tablesaw-aggregate</artifactId>
+            <artifactId>tablesaw-core</artifactId>
+            <version>${tablesaw.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.tablesaw</groupId>
+            <artifactId>tablesaw-jsplot</artifactId>
             <version>${tablesaw.version}</version>
         </dependency>
 
