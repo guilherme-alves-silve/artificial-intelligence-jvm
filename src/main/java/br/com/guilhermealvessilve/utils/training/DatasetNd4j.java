@@ -14,7 +14,7 @@ public class DatasetNd4j {
         throw new IllegalArgumentException("No DatasetNd4j!");
     }
 
-    public static SplitTrainTestArrays to2DINDArray(final double proportion, final Table table) {
+    public static SplitTrainTestArrays splitXYTrainTestINDArray(final double proportion, final Table table) {
         final var splitTrainTest = DatasetSplit.splitXYTrainTest(proportion, table);
         var xTrain = toINDArray(splitTrainTest.xTrain());
         var yTrain = toINDArray(splitTrainTest.yTrain());

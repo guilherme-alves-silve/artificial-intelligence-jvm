@@ -3,15 +3,20 @@ package br.com.guilhermealvessilve.machinelearning.scratch.knn;
 import br.com.guilhermealvessilve.utils.Resources;
 import br.com.guilhermealvessilve.utils.plot.MultiScatterPlot;
 import br.com.guilhermealvessilve.utils.training.DatasetNd4j;
+import org.nd4j.linalg.api.buffer.DataType;
+import org.nd4j.linalg.api.ndarray.INDArray;
 import tech.tablesaw.api.Table;
 
 import java.io.IOException;
 
 import static java.util.Map.entry;
+import static org.nd4j.linalg.factory.Nd4j.sum;
 
 public class MainKNN {
 
     public static void main(String[] args) throws IOException {
+
+        boolean showGraph = args.length > 0 && Boolean.parseBoolean(args[0]);
         try (final var dataset = Resources.fromResources("/datasets/iris/iris.data")) {
 
             final var table = Table.read().csv(dataset);
@@ -25,16 +30,17 @@ public class MainKNN {
                     .asDoubleColumn());
 
             System.out.println(table.structure());
-            System.out.println(table.print());
+            System.out.println(table.first(3));
 
-            MultiScatterPlot.plot("Iris Dataset", table,
-                    "length",
-                    "width",
-                    entry("sepal_length", "sepal_width"),
-                    entry("petal_length", "petal_width"));
+            if (showGraph) {
+                MultiScatterPlot.plot("Iris Dataset", table,
+                        "length",
+                        "width",
+                        entry("sepal_length", "sepal_width"),
+                        entry("petal_length", "petal_width"));
+            }
 
-            final var splitTrainTest = DatasetNd4j.to2DINDArray(0.8, table);
-            System.out.println(splitTrainTest);
+            final var splitTrainTest = DatasetNd4j.splitXYTrainTestINDArray(0.7, table);
             var xTrain = splitTrainTest.xTrain();
             var yTrain = splitTrainTest.yTrain();
             var xTest = splitTrainTest.xTest();
@@ -42,7 +48,11 @@ public class MainKNN {
 
             final var knn = new KNN(3);
             knn.fit(xTrain, yTrain);
-            knn.predict(xTest.getRow(0));
+            System.out.println("Accuracy: " + accuracy(yTest, knn.predict(xTest)));
         }
+    }
+
+    private static float accuracy(INDArray yTest, INDArray predictions) {
+        return sum(yTest.eq(predictions).castTo(DataType.FLOAT)).div(predictions.size(0)).getFloat(0);
     }
 }

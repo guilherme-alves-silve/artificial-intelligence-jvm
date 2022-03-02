@@ -1,4 +1,4 @@
-package br.com.guilhermealvessilve.utils.array;
+package br.com.guilhermealvessilve.utils.collections.array;
 
 import org.nd4j.shade.guava.primitives.Doubles;
 import org.nd4j.shade.guava.primitives.Floats;
@@ -8,73 +8,73 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.IntBinaryOperator;
 
-public class ArgSort {
+public class Sort {
 
-    private ArgSort() {
-        throw new IllegalArgumentException("No ArgSort!");
+    private Sort() {
+        throw new IllegalArgumentException("No Sort!");
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final int[] array) {
-        return sort(array, true);
+    public static int[] argsort(final int[] array) {
+        return argsort(array, true);
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final int[] array, final boolean ascending) {
+    public static int[] argsort(final int[] array, final boolean ascending) {
         final var indexes = new Integer[array.length];
-        return sort(indexes, ascending, (idx1, idx2) -> Ints.compare(array[idx1], array[idx2]));
+        return argsort(indexes, ascending, (idx1, idx2) -> Ints.compare(array[idx1], array[idx2]));
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final double[] array) {
-        return sort(array, true);
+    public static int[] argsort(final double[] array) {
+        return argsort(array, true);
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final double[] array, final boolean ascending) {
+    public static int[] argsort(final double[] array, final boolean ascending) {
         final var indexes = new Integer[array.length];
-        return sort(indexes, ascending, (idx1, idx2) -> Doubles.compare(array[idx1], array[idx2]));
+        return argsort(indexes, ascending, (idx1, idx2) -> Doubles.compare(array[idx1], array[idx2]));
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final float[] array) {
-        return sort(array, true);
+    public static int[] argsort(final float[] array) {
+        return argsort(array, true);
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final float[] array, final boolean ascending) {
+    public static int[] argsort(final float[] array, final boolean ascending) {
         final var indexes = new Integer[array.length];
-        return sort(indexes, ascending, (idx1, idx2) -> Floats.compare(array[idx1], array[idx2]));
+        return argsort(indexes, ascending, (idx1, idx2) -> Floats.compare(array[idx1], array[idx2]));
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final List<Float> list) {
-        return sort(list, true);
+    public static int[] argsort(final List<Float> list) {
+        return argsort(list, true);
     }
 
     /**
      * Original credit: https://github.com/alberts/array4j/blob/master/src/main/java/net/lunglet/util/ArrayUtils
      */
-    public static int[] sort(final List<Float> list, final boolean ascending) {
+    public static int[] argsort(final List<Float> list, final boolean ascending) {
         final var indexes = new Integer[list.size()];
-        return sort(indexes, ascending, (idx1, idx2) -> Floats.compare(list.get(idx1), list.get(idx2)));
+        return argsort(indexes, ascending, (idx1, idx2) -> Floats.compare(list.get(idx1), list.get(idx2)));
     }
 
-    private static int[] sort(final Integer[] indexes, final boolean ascending, IntBinaryOperator function) {
+    private static int[] argsort(final Integer[] indexes, final boolean ascending, IntBinaryOperator function) {
         for (int i = 0; i < indexes.length; i++) {
             indexes[i] = i;
         }

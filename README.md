@@ -21,3 +21,8 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Artificial_intelligence)
 
 * [Python Enginner machine learning list](https://www.youtube.com/watch?v=ngLyX54e1LU&list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E&ab_channel=PythonEngineer)
 * TODO
+
+# Machine Learning
+
+* KNN [X]
+* Linear Regression [] 
