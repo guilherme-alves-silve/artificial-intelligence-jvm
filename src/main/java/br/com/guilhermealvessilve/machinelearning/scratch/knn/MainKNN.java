@@ -48,7 +48,8 @@ public class MainKNN {
 
             final var knn = new KNN(3);
             knn.fit(xTrain, yTrain);
-            System.out.println("Accuracy: " + accuracy(yTest, knn.predict(xTest)));
+            System.out.println("Test accuracy: " + accuracy(yTest, knn.predict(xTest)));
+            System.out.println("Training accuracy: " + accuracy(yTrain, knn.predict(xTrain)));
         }
     }
 
