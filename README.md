@@ -20,9 +20,15 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Artificial_intelligence)
 # The artificial intelligence course, is based on the courses below:
 
 * [Python Enginner machine learning list](https://www.youtube.com/watch?v=ngLyX54e1LU&list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E&ab_channel=PythonEngineer)
+* [Artificial Intelligence I: Meta-Heuristics and Games in Java](https://www.udemy.com/course/artificial-intelligence-games-in-java/)
 * TODO
 
 # Machine Learning
 
-* KNN [X]
-* Linear Regression [] 
+- [X] KNN
+- [ ] Linear Regression 
+
+# Meta-Heuristics
+
+- [X] Path Finding (Depth-First Search)
+- [ ] Path Finding ()
