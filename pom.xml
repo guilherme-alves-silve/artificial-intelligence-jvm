@@ -13,7 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
 
         <deeplearning4j.version>1.0.0-M1.1</deeplearning4j.version>
-        <tablesaw.version>0.42.0</tablesaw.version>
+        <tablesaw.version>0.43.1</tablesaw.version>
     </properties>
 
     <dependencies>
@@ -40,6 +40,13 @@
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-jsplot</artifactId>
             <version>${tablesaw.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
