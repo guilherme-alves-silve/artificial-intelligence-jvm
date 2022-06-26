@@ -35,9 +35,21 @@ public class AStarSearch {
                 c, List.of(edge(10, a), edge(30, b))
         );
 
+        Map<Vertex, List<Edge>> graph3 = Map.of(
+                a, List.of(edge(1, b), edge(1, d)),
+                b, List.of(edge(1, c), edge(1, d)),
+                c, List.of(edge(1, e), edge(1, g), edge(1, a)),
+                d, List.of(edge(100, f)),
+                e, List.of(edge(100, f), edge(1, g)),
+                f, List.of(),
+                g, List.of(edge(1, f))
+        );
+
         System.out.println("getApproximatedShortestPath(A, F): " + getApproximatedShortestPath(graph1, a, f)); // -> [A, B, C, E, G, F]
         System.out.println("getApproximatedShortestPath(A, G): " + getApproximatedShortestPath(graph1, a, g)); // -> [A, B, C, E, G]
         System.out.println("getApproximatedShortestPath(A, G): " + getApproximatedShortestPath(graph2, a, c)); // -> [A, B, C]
+        System.out.println("getApproximatedShortestPath(A, F): " + getApproximatedShortestPath(graph3, a, f)); // -> [A, B, C, E, G, F]
+        System.out.println("getApproximatedShortestPath(A, F): " + getApproximatedShortestPath(graph3, a, c)); // -> [A, B, C]
     }
 
     public static List<Path> getApproximatedShortestPath(Map<Vertex, List<Edge>> graph, Vertex src, Vertex dest) {
