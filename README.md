@@ -28,7 +28,8 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Artificial_intelligence)
 - [X] KNN
 - [ ] Linear Regression 
 
-# Meta-Heuristics
+# Path-Finding
 
-- [X] Path Finding (Depth-First Search)
-- [ ] Path Finding ()
+- [X] Depth-First Search
+- [X] Iterative Deeping Depth First Search
+- [ ] A* Search
