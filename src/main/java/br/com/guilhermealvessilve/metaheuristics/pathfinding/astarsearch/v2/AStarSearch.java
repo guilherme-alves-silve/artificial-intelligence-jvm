@@ -78,6 +78,7 @@ public class AStarSearch {
                             .setDistanceFromStart(distanceFromStart)
                             .setTotalDistance(totalDistance);
                     queue.add(neighbor);
+                    visited.add(neighbor);
                 }
             }
         }
