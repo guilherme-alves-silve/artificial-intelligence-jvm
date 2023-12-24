@@ -10,16 +10,8 @@ class MarkovDecisionProcessValueIterationTest {
 
     @Test
     void shouldCheckCorrectPolicyAfter100Iterations() {
-        var algorithm = new MarkovDecisionProcessValueIteration(Map.of(
-                "stateReward", -0.1f,
-                "gamma", 0.99f,
-                "epsilon", 1e-7f,
-                "actionProb", 0.8f,
-                "actionMissProb", 0.1f,
-                "epochs", 100,
-                "rows", 3,
-                "cols", 4
-        ));
+        var algorithm = new MarkovDecisionProcessValueIteration(new MDPConfig(-0.1f, 0.99f, 1e-7f,0.8f,
+                                                        0.1f, 100, 3, 4));
         var pi = algorithm.run();
         var expectedPi = new char[][]{{'R', 'R', 'R', '+'},
                                       {'U', '@', 'U', '-'},

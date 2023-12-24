@@ -32,8 +32,11 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Artificial_intelligence)
 
 - [X] Depth-First Search
 - [X] Iterative Deeping Depth First Search
-- [ ] A* Search
+- [X] A* Search
+- [X] Q-Learning
 
 # Reinforcement Learning
 
 - [X] Markov Decision Process Value Iteration
+- [X] Q-Learning (Path-Finding)
+- [ ] Q-Learning (Tic Tac Toe)

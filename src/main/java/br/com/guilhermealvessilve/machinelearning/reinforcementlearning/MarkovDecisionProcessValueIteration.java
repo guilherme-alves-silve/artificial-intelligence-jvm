@@ -21,15 +21,15 @@ public class MarkovDecisionProcessValueIteration {
     private final float[][] R;
     private final char[][] pi;
 
-    public MarkovDecisionProcessValueIteration(Map<String, Number> config) {
-        this.stateReward = config.get("stateReward").floatValue();
-        this.gamma = config.get("gamma").floatValue();
-        this.epsilon = config.get("epsilon").floatValue();
-        this.actionProb = config.get("actionProb").floatValue();
-        this.actionMissProb = config.get("actionMissProb").floatValue();
-        this.epochs = config.get("epochs").intValue();
-        this.rows = config.get("rows").intValue();
-        this.cols = config.get("cols").intValue();
+    public MarkovDecisionProcessValueIteration(final MDPConfig config) {
+        this.stateReward = config.stateReward();
+        this.gamma = config.gamma();
+        this.epsilon = config.epsilon();
+        this.actionProb = config.actionProb();
+        this.actionMissProb = config.actionMissProb();
+        this.epochs = config.epochs();
+        this.rows = config.rows();
+        this.cols = config.cols();
         this.V = new float[rows][cols];
         this.VNext = new float[rows][cols];
         this.R = new float[rows][cols];
