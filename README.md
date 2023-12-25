@@ -40,3 +40,4 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/Artificial_intelligence)
 - [X] Markov Decision Process Value Iteration
 - [X] Q-Learning (Path-Finding)
 - [ ] Q-Learning (Tic Tac Toe)
+- [X] Multi-Armed Bandit Epsilon-Greedy
