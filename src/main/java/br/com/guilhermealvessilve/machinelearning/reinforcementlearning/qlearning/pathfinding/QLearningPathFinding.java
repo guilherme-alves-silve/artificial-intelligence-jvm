@@ -1,4 +1,4 @@
-package br.com.guilhermealvessilve.machinelearning.reinforcementlearning;
+package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.qlearning.pathfinding;
 
 import java.util.ArrayList;
 import java.util.List;

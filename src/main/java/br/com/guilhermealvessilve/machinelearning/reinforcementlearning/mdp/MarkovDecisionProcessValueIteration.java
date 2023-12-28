@@ -1,6 +1,4 @@
-package br.com.guilhermealvessilve.machinelearning.reinforcementlearning;
-
-import java.util.Map;
+package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.mdp;
 
 import static br.com.guilhermealvessilve.machinelearning.reinforcementlearning.utils.MatrixUtils.argmax;
 

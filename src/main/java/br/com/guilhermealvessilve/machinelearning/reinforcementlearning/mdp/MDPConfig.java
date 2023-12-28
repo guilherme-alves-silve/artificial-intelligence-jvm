@@ -1,4 +1,4 @@
-package br.com.guilhermealvessilve.machinelearning.reinforcementlearning;
+package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.mdp;
 
 public record MDPConfig(float stateReward,
                         float gamma,

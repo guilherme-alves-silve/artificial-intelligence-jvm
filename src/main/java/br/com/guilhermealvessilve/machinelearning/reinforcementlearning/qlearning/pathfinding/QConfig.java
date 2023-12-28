@@ -1,4 +1,4 @@
-package br.com.guilhermealvessilve.machinelearning.reinforcementlearning;
+package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.qlearning.pathfinding;
 
 public record QConfig(float standardReward,
                       float exitReward,

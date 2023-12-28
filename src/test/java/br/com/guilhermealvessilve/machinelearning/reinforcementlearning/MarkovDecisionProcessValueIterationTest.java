@@ -1,8 +1,8 @@
 package br.com.guilhermealvessilve.machinelearning.reinforcementlearning;
 
+import br.com.guilhermealvessilve.machinelearning.reinforcementlearning.mdp.MDPConfig;
+import br.com.guilhermealvessilve.machinelearning.reinforcementlearning.mdp.MarkovDecisionProcessValueIteration;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,6 +1,4 @@
-package br.com.guilhermealvessilve.machinelearning.reinforcementlearning;
-
-import java.util.Map;
+package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.mdp;
 
 public class MainMarkovDecisionProcessValueIteration {
 
