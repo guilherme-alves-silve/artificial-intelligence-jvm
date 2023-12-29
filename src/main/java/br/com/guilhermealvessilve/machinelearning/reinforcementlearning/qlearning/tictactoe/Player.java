@@ -7,15 +7,19 @@ import static br.com.guilhermealvessilve.machinelearning.reinforcementlearning.u
 
 public abstract class Player {
 
+    protected int wins;
+
     public abstract int makeMove(List<String> board);
 
     public abstract void reward(int reward, List<String> board);
 
     public abstract Ticker ticker();
 
-    protected final void showBoard(List<String> board) {
-        System.out.println(join(slice(board, 0, 3), "|"));
-        System.out.println(join(slice(board, 3, 6), "|"));
-        System.out.println(join(slice(board, 6, 9), "|"));
+    public int getWins() {
+        return wins;
+    }
+
+    public void incrementWins() {
+        ++wins;
     }
 }

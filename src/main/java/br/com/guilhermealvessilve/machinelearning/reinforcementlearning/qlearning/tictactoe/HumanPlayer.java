@@ -15,7 +15,6 @@ public class HumanPlayer extends Player {
     public int makeMove(List<String> board) {
         while (true) {
             var scanner = new Scanner(System.in);
-            showBoard(board);
             System.out.println("Your next move (cell index 1-9):");
             if (scanner.hasNext("[1-9]")) {
                 int move = scanner.nextInt();

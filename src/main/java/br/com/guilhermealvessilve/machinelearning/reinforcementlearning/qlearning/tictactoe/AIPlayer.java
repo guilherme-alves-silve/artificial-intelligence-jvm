@@ -13,7 +13,7 @@ public class AIPlayer extends Player {
     private final float alpha;
     private final float gamma;
     private final float epsilon;
-    private final Ticker ticker;
+    private Ticker ticker;
     private final Random random;
     /**
      * The key is the (board, action) and the value is the reward
@@ -50,6 +50,11 @@ public class AIPlayer extends Player {
                     final float epsilon,
                     final Ticker ticker) {
         this(alpha, gamma, epsilon, ticker, new HashMap<>());
+    }
+
+    public AIPlayer setTicker(Ticker ticker) {
+        this.ticker = ticker;
+        return this;
     }
 
     @Override
