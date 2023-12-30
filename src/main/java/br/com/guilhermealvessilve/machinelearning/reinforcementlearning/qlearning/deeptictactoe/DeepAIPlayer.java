@@ -1,20 +1,20 @@
-package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.qlearning.tictactoe;
+package br.com.guilhermealvessilve.machinelearning.reinforcementlearning.qlearning.deeptictactoe;
 
+import br.com.guilhermealvessilve.machinelearning.reinforcementlearning.qlearning.tictactoe.Player;
+import br.com.guilhermealvessilve.machinelearning.reinforcementlearning.qlearning.tictactoe.Ticker;
 import org.nd4j.common.primitives.Pair;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import static java.util.List.copyOf;
 import static org.nd4j.common.primitives.Pair.pairOf;
 
-public class AIPlayer extends Player {
+public class DeepAIPlayer extends Player {
 
-    private static final float DEFAULT_Q = 0f;
     private static final int NO_ACTION = -1;
+    private static final float DEFAULT_Q = 0f;
     private final float alpha;
     private final float gamma;
     private final float epsilon;
@@ -30,17 +30,35 @@ public class AIPlayer extends Player {
     /**
      * Used just for Unit-Test
      */
-    protected AIPlayer(final float alpha,
-                       final float gamma,
-                       final float epsilon,
-                       final Ticker ticker,
-                       final Map<Pair<List<String>, Integer>, Float> qtable) {
+    protected DeepAIPlayer(final float alpha,
+                           final float gamma,
+                           final float epsilon,
+                           final Ticker ticker,
+                           final Map<Pair<List<String>, Integer>, Float> qtable) {
         this.alpha = alpha;
         this.gamma = gamma;
         this.epsilon = epsilon;
         this.ticker = ticker;
         this.random = new Random();
         this.qtable = qtable;
+    }
+
+    protected final INDArray oneHotEncodeInput(List<String> states, int action) {
+
+        // X -> 1, 0, 0
+        // O -> 0, 1, 0
+        // BLANK -> 0, 0, 1
+        var oneHotArray = new float[36];
+        for (int i = 0, j = 0; i < states.size(); ++i, j += 3) {
+            oneHotArray[j] = states.get(i).equals(Ticker.X.toString()) ? 1 : 0;
+            oneHotArray[j+1] = states.get(i).equals(Ticker.O.toString()) ? 1 : 0;
+            oneHotArray[j+2] = states.get(i).isBlank() ? 1 : 0;
+        }
+
+        // one of 9 actions -> 0, 0, 0, 0, 0, 0, 0, 0, 0
+        oneHotArray[27+action] = 1;
+
+        return Nd4j.create(oneHotArray, new int[]{1, 36});
     }
 
     /**
@@ -51,10 +69,10 @@ public class AIPlayer extends Player {
      * @param epsilon the exploration factor
      * @param ticker the player ticker (X or O)
      */
-    public AIPlayer(final float alpha,
-                    final float gamma,
-                    final float epsilon,
-                    final Ticker ticker) {
+    public DeepAIPlayer(final float alpha,
+                        final float gamma,
+                        final float epsilon,
+                        final Ticker ticker) {
         this(alpha, gamma, epsilon, ticker, new HashMap<>());
     }
 
@@ -80,7 +98,7 @@ public class AIPlayer extends Player {
     protected final float getMaxQ(List<String> state) {
         var availableMoves = availableMoves(state);
         if (availableMoves.isEmpty()) {
-            return DEFAULT_Q;
+            return 0f;
         }
 
         var bestMovesAndRewards = bestMoves(state, availableMoves);
@@ -95,7 +113,7 @@ public class AIPlayer extends Player {
             moveAndRewardList.add(pairOf(move, reward));
         }
 
-        var bestMoveAndReward = pairOf(0, DEFAULT_Q);
+        var bestMoveAndReward = pairOf(0, 0f);
         var it = moveAndRewardList.iterator();
         while (it.hasNext()) {
             var moveAndReward = it.next();

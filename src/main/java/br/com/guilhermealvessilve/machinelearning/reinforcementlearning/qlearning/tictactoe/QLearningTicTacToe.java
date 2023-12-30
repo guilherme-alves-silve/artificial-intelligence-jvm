@@ -44,15 +44,14 @@ public class QLearningTicTacToe {
             System.out.printf("Player %s turn!%n", player.ticker());
             showBoard(board);
             var gameResult = gameOver(board, players);
-            var terminated = gameResult.terminated();
-            if (terminated) {
-                var winner = gameResult.winner();
-                if (player == winner) {
+            if (gameResult.terminated()) {
+                final var winner = gameResult.winner();
+                if (winner == player) {
                     System.out.printf("%s with ticker %s player won!%n", playerType(player), player.ticker());
                     player.reward(winReward, board);
                     otherPlayer.reward(lossReward, board);
                     player.incrementWins();
-                } else if (otherPlayer == winner) {
+                } else if (winner == otherPlayer) {
                     System.out.printf("%s with ticker %s player won!%n", playerType(otherPlayer), otherPlayer.ticker());
                     otherPlayer.reward(winReward, board);
                     player.reward(lossReward, board);

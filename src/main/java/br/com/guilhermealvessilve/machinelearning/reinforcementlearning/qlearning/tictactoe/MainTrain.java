@@ -13,24 +13,26 @@ public class MainTrain {
 
         var aiPlayer1 = new AIPlayer(alpha, gamma, epsilon, Ticker.X);
         var aiPlayer2 = new AIPlayer(alpha, gamma, epsilon, Ticker.O);
-        var trainQLearningTicTacToe = new QLearningTicTacToe(
+        var trainTicTacToe = new QLearningTicTacToe(
             winReward, lossReward, tieReward,
             aiPlayer1, aiPlayer2
         );
 
         for (int epoch = 0; epoch < epochs; ++epoch) {
-            trainQLearningTicTacToe.play();
+            trainTicTacToe.play();
         }
 
+        System.out.println();
         System.out.println(STR."aiPlayer1 wins: \{aiPlayer1.getWins()}");
         System.out.println(STR."aiPlayer2 wins: \{aiPlayer2.getWins()}");
+        System.out.println("Starting Human vs AI game...");
 
         var bestAIPlayer = aiPlayer1.getWins() >= aiPlayer2.getWins()? aiPlayer1 : aiPlayer2;
         var humanPlayer = new HumanPlayer(bestAIPlayer.ticker().reverse());
-        var playQLearningTicTacToe = new QLearningTicTacToe(
+        var playTicTacToe = new QLearningTicTacToe(
                 winReward, lossReward, tieReward,
                 humanPlayer, bestAIPlayer
         );
-        playQLearningTicTacToe.play();
+        playTicTacToe.play();
     }
 }
