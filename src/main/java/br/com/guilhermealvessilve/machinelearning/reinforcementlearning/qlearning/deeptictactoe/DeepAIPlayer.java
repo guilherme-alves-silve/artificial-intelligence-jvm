@@ -6,7 +6,9 @@ import org.nd4j.common.primitives.Pair;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import static java.util.List.copyOf;
 import static org.nd4j.common.primitives.Pair.pairOf;
@@ -14,33 +16,35 @@ import static org.nd4j.common.primitives.Pair.pairOf;
 public class DeepAIPlayer extends Player {
 
     private static final int NO_ACTION = -1;
-    private static final float DEFAULT_Q = 0f;
+    private static final int DEFAULT_EPOCHS = 3;
+    private static final int[] LABEL_SHAPE = new int[]{1, 1};
     private final float alpha;
     private final float gamma;
     private final float epsilon;
     private final Ticker ticker;
     private final Random random;
-    /**
-     * The key is the (board, action) and the value is the reward
-     */
-    private final Map<Pair<List<String>, Integer>, Float> qtable;
+    private final MLP qtable;
     private int previousMove = -1;
     private List<String> previousBoard;
 
     /**
-     * Used just for Unit-Test
+     * Below the formula that is used in Q-Learning that is TD (Time-Difference):
+     * Q(s, a) = Q(s, a) + alpha[R(s, a) + gamma maxQ(s', a') - Q(s, a)]
+     * @param alpha the learning rate
+     * @param gamma the discount factor
+     * @param epsilon the exploration factor
+     * @param ticker the player ticker (X or O)
      */
     protected DeepAIPlayer(final float alpha,
                            final float gamma,
                            final float epsilon,
-                           final Ticker ticker,
-                           final Map<Pair<List<String>, Integer>, Float> qtable) {
+                           final Ticker ticker) {
         this.alpha = alpha;
         this.gamma = gamma;
         this.epsilon = epsilon;
         this.ticker = ticker;
         this.random = new Random();
-        this.qtable = qtable;
+        this.qtable = new MLP();
     }
 
     protected final INDArray oneHotEncodeInput(List<String> states, int action) {
@@ -61,21 +65,6 @@ public class DeepAIPlayer extends Player {
         return Nd4j.create(oneHotArray, new int[]{1, 36});
     }
 
-    /**
-     * Below the formula that is used in Q-Learning that is TD (Time-Difference):
-     * Q(s, a) = Q(s, a) + alpha[R(s, a) + gamma maxQ(s', a') - Q(s, a)]
-     * @param alpha the learning rate
-     * @param gamma the discount factor
-     * @param epsilon the exploration factor
-     * @param ticker the player ticker (X or O)
-     */
-    public DeepAIPlayer(final float alpha,
-                        final float gamma,
-                        final float epsilon,
-                        final Ticker ticker) {
-        this(alpha, gamma, epsilon, ticker, new HashMap<>());
-    }
-
     @Override
     public int makeMove(List<String> board) {
         this.previousBoard = copyOf(board);
@@ -92,7 +81,7 @@ public class DeepAIPlayer extends Player {
     }
 
     protected final float getQ(List<String> state, int action) {
-        return qtable.getOrDefault(pairOf(state, action), DEFAULT_Q);
+        return qtable.predict(oneHotEncodeInput(state, action));
     }
 
     protected final float getMaxQ(List<String> state) {
@@ -152,7 +141,10 @@ public class DeepAIPlayer extends Player {
         float oldQ = getQ(previousBoard, previousMove);
         float newMaxQ = getMaxQ(board);
         var updateQ = oldQ + alpha*(reward + gamma * newMaxQ - oldQ);
-        qtable.put(pairOf(copyOf(previousBoard), previousMove), updateQ);
+
+        var data = oneHotEncodeInput(previousBoard, previousMove);
+        var label = Nd4j.create(new float[]{updateQ}, LABEL_SHAPE);
+        qtable.fit(data, label, DEFAULT_EPOCHS);
 
         this.previousBoard = null;
         this.previousMove = NO_ACTION;

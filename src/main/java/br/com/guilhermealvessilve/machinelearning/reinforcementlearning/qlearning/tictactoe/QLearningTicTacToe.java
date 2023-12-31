@@ -43,6 +43,8 @@ public class QLearningTicTacToe {
         while (true) {
             System.out.printf("Player %s turn!%n", player.ticker());
             showBoard(board);
+            int move = player.makeMove(board);
+            board.set(move, player.ticker().name());
             var gameResult = gameOver(board, players);
             if (gameResult.terminated()) {
                 final var winner = gameResult.winner();
@@ -64,8 +66,6 @@ public class QLearningTicTacToe {
                 break;
             }
 
-            int move = player.makeMove(board);
-            board.set(move, player.ticker().name());
             firstPlayerTurn = !firstPlayerTurn;
             players = getPlayers(firstPlayerTurn);
             player = players.get(0);
@@ -89,7 +89,7 @@ public class QLearningTicTacToe {
 
             // Vertical check
             if (checkState(board, player.ticker(), List.of(0, 3, 6)) ||
-                    checkState(board, player.ticker(), List.of(1, 4, 5)) ||
+                    checkState(board, player.ticker(), List.of(1, 4, 7)) ||
                     checkState(board, player.ticker(), List.of(2, 5, 8))) {
                 return new GameResult(true, player);
             }
